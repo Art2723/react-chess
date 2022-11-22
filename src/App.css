@@ -14,8 +14,37 @@ body {
     justify-content: center;
     align-items: center;
     position: absolute;
+    flex-direction: column;
 }
-
+.first-container {
+    position: relative;
+    width: calc(2 * 64px * 8  + 64px * 8/2.7 + 8px);
+    height: 64px;
+    display: flex;
+    flex-wrap: wrap;
+    opacity: 0.9;
+    /* background: linear-gradient(to bottom , cornflowerblue, steelblue); */
+    background: linear-gradient(to bottom , lightblue, steelblue);
+    box-shadow: 5px 5px 15px black;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    /* text-align: center; */
+    justify-content: center;
+    align-items: center;
+}
+.first-container span {
+    font-family: Arial;
+    font-size: 44px;
+    font-weight: bold;
+}
+.second-container {
+    width: 100vw;
+    height: calc(64px * 8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
 .board {
     width: calc(64px * 8);
     height: calc(64px * 8);
@@ -40,6 +69,28 @@ body {
     opacity: 0.9;
 
     margin-left: 20px;
+}
+.message {
+    position: relative;
+    width: calc(2 * 64px * 8  + 64px * 8/2.7 + 8px);
+    height: 64px;
+    display: flex;
+    flex-wrap: wrap;
+    opacity: 0.9;
+    background: linear-gradient(to bottom , cornflowerblue, steelblue);
+    /* background: linear-gradient(to bottom , lightblue, darkgray); */
+    box-shadow: 5px 5px 15px black;
+    margin-top: 20px;
+    border-radius: 3px;
+    /* text-align: center; */
+    justify-content: center;
+    align-items: center;
+}
+.message span {
+    font-family: Arial;
+    font-size: 24px;
+    /* font-weight: bold; */
+    font-style: italic;
 }
 .history {
     position: relative;
@@ -83,7 +134,7 @@ tbody::before {
     margin-top: 0;
     background: linear-gradient(to bottom , cornflowerblue, steelblue);
     border-radius: 3px;
-    text-align: center;
+    /* text-align: center; */
     box-shadow: 5px 5px 15px black;
     display: flex;
     justify-content: center;

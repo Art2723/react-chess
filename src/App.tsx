@@ -7,6 +7,7 @@ import './App.css';
 import BoardComponent from "./components/BoardComponent";
 import DashboardComponent from "./components/DashboardComponent";
 import HistComponent from "./components/HistComponent";
+import MessageComponent from "./components/MessageComponent";
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
     const [player2, setPlayer2] = useState(new Player(false, true, 'BLACK'))
     // const [game, setGame] = useState(new Game(player1, player2))
     const { current: game } = useRef(new Game(player1, player2));
-    // const [cells, setCells] = useState(game.board, useRef.cells)
+    const [cells, setCells] = useState([...game.board.cells])
     const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
     // const [whitePlayer, setWhitePlayer] = useState(new Player(Colors.WHITE))
     // const [blackPlayer, setBlackPlayer] = useState(new Player(Colors.BLACK))
@@ -28,7 +29,7 @@ function App() {
         setSelectedCell(null)
         setCurrentPlayer(game.currentTurn)
         // setCells(structuredClone(cells))
-        // setCells([...cells])
+        // setCells([...game.board.cells])
         setUpdateRequired({});
     }
 
@@ -38,10 +39,13 @@ function App() {
 
     return (
         <div className="app">
+            <div className="first-container">
+                <span>
+                    CHESS
+                </span>
+            </div>
 
-
-
-
+            <div className="second-container">
             <HistComponent
                 // game={game}
                 movesPlayed={game.movesPlayed}
@@ -50,6 +54,8 @@ function App() {
             />
             <BoardComponent
                 game={game}
+                // highlightCells={game.highlightCells.bind(game)}
+                // cells={cells}
                 makeMove={game.playerMove.bind(game)}
                 currentPlayer={currentPlayer}
                 switchPlayer={() => switchPlayer()}
@@ -61,6 +67,10 @@ function App() {
                 game={game}
             />
 
+                   </div>
+            <MessageComponent
+                game={game}
+            />
                    </div>
     )
 }

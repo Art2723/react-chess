@@ -97,6 +97,8 @@ export class Game {
 
 
     makeMove(move: Move, player: Player) {
+
+        this.message = "" 
         // is piece?
         let piece = move.start.getPiece();
         if (!piece) {
@@ -173,7 +175,21 @@ export class Game {
             move.end.setPiece(move.start.getPiece());
             move.start.setPiece(null);
 
-            // check for check
+            // check for new check
+            for (let i = 0; i<8; i++){
+                for (let j = 0; j<8; j++){
+                    if (this.board.cells[i][j].getPiece() instanceof King && this.board.cells[i][j].getPiece()?.white !== this.currentTurn.isWhiteSide()) {
+                        if ((this.currentTurn.isWhiteSide() && this.board.isCellAttacted(this.board.cells[i][j])["white"]) 
+                            ||(!this.currentTurn.isWhiteSide() && this.board.isCellAttacted(this.board.cells[i][j]).black)){
+
+                        this.message = "CHECK!!!"
+
+                    }
+                    }
+                }
+            };     
+
+            // check for old check or wrong move with check
             for (let i = 0; i<8; i++){
                 for (let j = 0; j<8; j++){
                     if (this.board.cells[i][j].getPiece() instanceof King && this.board.cells[i][j].getPiece()?.white === this.currentTurn.isWhiteSide()) {
@@ -181,6 +197,7 @@ export class Game {
                             ||(!this.currentTurn.isWhiteSide() && this.board.isCellAttacted(this.board.cells[i][j]).white)){
 
                         this.moveOnTurn(this.currentMovesPlayed.length-1);
+                        this.message = "CHECK!!! Protect your King!!!"
                         return false;
 
                     }
@@ -220,6 +237,7 @@ export class Game {
 
         }
         moveOnTurn(i:number){
+            this.message = "" 
             let movesHist=this.movesPlayed.slice(0)    
             let moves=this.movesPlayed.slice(0,i+1)    
             // this.board = new Board();
@@ -233,6 +251,5 @@ export class Game {
                 // this.makeMove(moves[j], moves[j].player)
             }
             this.movesPlayed= movesHist 
-           
         }
     }
